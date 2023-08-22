@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok/config/theme/app_theme.dart';
+import 'package:tiktok/presentation/providers/discover_provider.dart';
+import 'package:tiktok/presentation/screen/discover/discover_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,17 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme().getTheme() ,
-      title: 'TikTok',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('TikTok'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (BuildContext context) => ChangeNotifier(),  ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme().getTheme() ,
+        title: 'TikTok',
+        home: const DiscoverScreen()
       ),
     );
   }
