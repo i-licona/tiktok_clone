@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) => ChangeNotifier(),  ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (BuildContext context) => DiscoverProvider()..loadNextPage(), 
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
