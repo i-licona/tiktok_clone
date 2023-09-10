@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   intl: ^0.18.1
   provider: ^6.0.5
-  video: ^0.0.1
   video_player: ^2.7.0
 
 dev_dependencies:
@@ -23,5 +22,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-assets:
-  - assets/videos/
+  assets:
+    - assets/videos/

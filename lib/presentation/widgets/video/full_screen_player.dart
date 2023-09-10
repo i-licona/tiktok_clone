@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -18,20 +17,22 @@ class FullScreenPlayer extends StatefulWidget {
 }
 
 class _FullScreenPlayerState extends State<FullScreenPlayer> {
+  
   late VideoPlayerController controller;
+
   @override
   void initState() {
-    controller = VideoPlayerController.asset(widget.url)
+    super.initState();
+    controller = VideoPlayerController.asset( widget.url )
     ..setVolume(0)
     ..setLooping(true)
     ..play();
-    super.initState();
   }
 
   /* evitar que el video se siga reproduciendo cuando ya no lo estamos viendo */
   @override
   void dispose() {
-    controller.dispose();
+    controller.dispose( );
     super.dispose();
   }
 
@@ -40,8 +41,14 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
     return FutureBuilder(
       future: controller.initialize(),
       builder: (context, snapshot) {
-        return const Center(
-          child: CircularProgressIndicator(strokeWidth: 2,),
+        if ( snapshot.connectionState != ConnectionState.done ){
+          return const Center(
+            child: CircularProgressIndicator(strokeWidth: 2,),
+          );
+        }
+        return AspectRatio(
+          aspectRatio: controller.value.aspectRatio,
+          child: VideoPlayer(controller),
         );
       },
     );
